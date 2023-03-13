@@ -4,12 +4,12 @@ import Head from 'next/head'
 
 import NavBar from './NavBar'
 import Footer from './Footer'
-
 interface Children {
   children: ReactNode
 }
 
 export default function Layout({ children }: Children)  {
+  
   return (
     <>
       <Head>

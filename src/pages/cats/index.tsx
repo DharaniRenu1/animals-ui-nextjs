@@ -3,10 +3,26 @@ import { Cat } from '@/domain/cat'
 import { Table } from 'react-bootstrap'
 import { CatsService } from '@/services/api/cats-service'
 import Link from 'next/link'
+import Search from './search';
+import { useState } from "react";
 
 const service = new CatsService()
 
-export default function CatsPage({ cats } : any) {
+export default function CatsPage({ cats: initialCats }: { cats: any } ) {
+   
+  const [cats, setCats] = useState(initialCats)
+
+  const handleSearch = async (search: string) => {
+    if(search != '')
+    {
+      setCats(await service.search(search))
+    }
+    else
+    {
+      setCats(await service.all())
+    }
+  };
+
   return (
     <>
       <Head>
@@ -16,9 +32,19 @@ export default function CatsPage({ cats } : any) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1>View your cats</h1>
+        <div className={'row'}>
+          <div className={'col-4'}>
+          <h1>View your cats</h1>
+
+          </div>
+          <div className={'col-8'}>
+          <Search onSearch={handleSearch} />
+
+          </div>
+        </div>
+
         <Table striped bordered hover>
-          <thead>
+          <thead> 
             <tr>
               <th>#</th>
               <th>Name</th>
@@ -27,7 +53,7 @@ export default function CatsPage({ cats } : any) {
             </tr>
           </thead>
           <tbody>
-            {cats?.length > 0 &&             
+            {cats?.length > 0 &&              
               cats.map((c: Cat) => (
                 <tr key={c.id}>
                   <td>{c.id}</td>

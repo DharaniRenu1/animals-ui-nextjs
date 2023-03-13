@@ -31,7 +31,7 @@ const NavBar = () => {
                   >
                     Home
                   </Link>
-                  <Link
+                  <Link 
                     href='/cats'
                     className='nav-link'
                   >
@@ -47,3 +47,4 @@ const NavBar = () => {
 }
 
 export default NavBar
+

@@ -1,9 +1,8 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.scss'
+import CommonForm from './form'
 
 export default function HomePage() {
+ 
   return (
     <>
       <Head>
@@ -14,11 +13,11 @@ export default function HomePage() {
       </Head>
       <main>
         <h1>Welcome, register your animals</h1>
-        <p>
-          Get started by managing your cat&nbsp;
-          <a href="cats">here</a>
-        </p>
+        
       </main>
+     <CommonForm
+     isEditForm= {false} 
+     />
     </>
   )
 }
